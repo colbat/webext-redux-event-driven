@@ -1,0 +1,16 @@
+{
+  "name": "webext-redux Event Driven Test",
+  "version": "1.0",
+  "manifest_version": 3,
+
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+
+  "action": {
+    "default_popup": "popup.html"
+  },
+
+  "permissions": ["storage"]
+}

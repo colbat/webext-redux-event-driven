@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    html {
+      min-height: 250px;
+      width: 250px;
+      background: #ffcc66;
+      color: #202020;
+    }
+
+    .counter {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 3rem;
+    }
+    
+    button {
+      all: unset;
+      cursor: pointer;
+      padding: 20px;
+    }
+
+    button:active {
+      color: #757575;
+    }
+
+    #value {
+      margin-left: 30px;
+      color: #b400ba;
+    }
+
+    .footer {
+      font-size: 1rem;
+      text-align: justify;
+    }
+  </style>
+</head>
+<body>
+  <h1>Counter</h1>
+
+  <div class="counter">
+    <button id="btn-decrement">-</button>
+    <button id="btn-increment">+</button>
+    <p id="value"></p>
+  </div>
+
+  <p class="footer">Play with the counter, close the popup, wait for the service worker to be idle, then open the popup again.</p>
+  
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
