@@ -2,6 +2,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import { wrapStore } from "webext-redux";
 import counterReducer, { initialState } from "./counter.js";
 
+// Since we are in a service worker, this is not persistent
+// and this will be reset to false, as expected, whenever
+// the service worker wakes up from idle.
+let isInitialized = false;
+
 // Optional: at the top level, we can safely deal with
 // everything unrelated to the redux store.
 //
@@ -39,8 +44,11 @@ chrome.runtime.onConnect.addListener((port) => {
     // The popup was opened.
     // Gets the current state from the storage.
     chrome.storage.local.get("state", (storage) => {
-      // 1. Initializes the redux store and the message passing.
-      init(storage.state || initialState);
+      if (!isInitialized) {
+        // 1. Initializes the redux store and the message passing.
+        init(storage.state || initialState);
+        isInitialized = false;
+      }
       // 2. Sends a message to notify that the store is ready.
       chrome.runtime.sendMessage({ type: "STORE_INITIALIZED" });
     });
